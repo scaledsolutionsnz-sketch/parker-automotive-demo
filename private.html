@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share Your Feedback | Parker Automotive, Christchurch</title>
+<meta name="description" content="Tell Parker Automotive how we can do better. Your feedback goes straight to the owner.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230b0e14'/><text x='50' y='70' font-family='Arial' font-size='58' font-weight='700' fill='%23e0a23c' text-anchor='middle'>P</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav scrolled">
+  <a class="brand" href="index.html"><span class="mark">P</span><span><b>Parker</b><span>Automotive · CHCH</span></span></a>
+  <div class="nav-cta">
+    <a class="nav-phone" href="tel:+64273310382">027 331 0382</a>
+    <a class="btn btn-primary" href="index.html">Back to site</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container review-wrap">
+    <span class="eyebrow" style="color:var(--accent)">We're listening</span>
+    <h1>Help us put it right</h1>
+    <p>Thanks for being honest. Tell us what happened and the owner will personally look into it.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:50px">
+  <div class="container" style="max-width:620px">
+    <div id="thanks" style="display:none;text-align:center;background:var(--bone);border:1px solid var(--line);border-radius:var(--radius);padding:46px 30px">
+      <div style="font-size:2.4rem;color:var(--accent)">✓</div>
+      <h2 style="text-transform:none;margin:10px 0 8px;font-size:1.6rem">Thank you</h2>
+      <p style="color:var(--muted)">Your feedback has been sent to Parker Automotive. We genuinely appreciate you taking the time, and we'll be in touch if needed.</p>
+      <a class="btn btn-dark" href="index.html" style="margin-top:18px">Back to home</a>
+    </div>
+
+    <form id="fbForm" action="https://formsubmit.co/parkerauto89@outlook.com" method="POST">
+      <input type="hidden" name="_subject" value="Private feedback — Parker Automotive website">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <div class="field-row">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" placeholder="Full name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@email.co.nz" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="rating">Your rating</label>
+        <input type="text" id="rating" name="rating" readonly>
+      </div>
+      <div class="field">
+        <label for="feedback">What could we have done better?</label>
+        <textarea id="feedback" name="feedback" placeholder="Tell us what happened — the more detail, the better we can fix it." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send feedback</button>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border:0;justify-content:center">
+      <span>© <span id="yr"></span> Parker Automotive · Christchurch &nbsp;·&nbsp; <a href="terms.html">Terms</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  // Pre-fill rating from URL
+  var params=new URLSearchParams(window.location.search);
+  var r=params.get('rating');
+  var ratingField=document.getElementById('rating');
+  ratingField.value = (r? r : '') + (r? ' out of 5 stars' : 'Not specified');
+  if(!r){ratingField.value='Not specified';}
+  // Show success state after submit (FormSubmit AJAX endpoint)
+  var form=document.getElementById('fbForm');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var data=new FormData(form);
+    fetch('https://formsubmit.co/ajax/parkerauto89@outlook.com',{
+      method:'POST',headers:{'Accept':'application/json'},body:data
+    }).then(function(){showThanks();}).catch(function(){showThanks();});
+  });
+  function showThanks(){
+    form.style.display='none';
+    document.getElementById('thanks').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+</script>
+</body>
+</html>

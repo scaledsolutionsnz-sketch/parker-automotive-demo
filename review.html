@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leave a Review | Parker Automotive, Christchurch</title>
+<meta name="description" content="Tell us how we did. Rate your experience with Parker Automotive in Christchurch.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230b0e14'/><text x='50' y='70' font-family='Arial' font-size='58' font-weight='700' fill='%23e0a23c' text-anchor='middle'>P</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="intro"><div class="mark-lg">PARKER <em>AUTOMOTIVE</em></div></div>
+
+<header class="nav scrolled">
+  <a class="brand" href="index.html"><span class="mark">P</span><span><b>Parker</b><span>Automotive · CHCH</span></span></a>
+  <div class="nav-cta">
+    <a class="nav-phone" href="tel:+64273310382">027 331 0382</a>
+    <a class="btn btn-primary" href="index.html">Back to site</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container review-wrap">
+    <span class="eyebrow" style="color:var(--accent)">Your feedback</span>
+    <h1>How was your visit?</h1>
+    <p>Tap a star to rate your experience with Parker Automotive.</p>
+    <div class="star-pick" id="stars">
+      <button data-v="1" aria-label="1 star">★</button>
+      <button data-v="2" aria-label="2 stars">★</button>
+      <button data-v="3" aria-label="3 stars">★</button>
+      <button data-v="4" aria-label="4 stars">★</button>
+      <button data-v="5" aria-label="5 stars">★</button>
+    </div>
+    <p class="review-note">5 stars means we nailed it — anything less and we want to hear how we can do better.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border:0;justify-content:center">
+      <span>© <span id="yr"></span> Parker Automotive · Christchurch &nbsp;·&nbsp; <a href="terms.html">Terms</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  setTimeout(function(){var i=document.querySelector('.intro');if(i)i.classList.add('done');},700);
+  // Replace with the real Google review link once the Business Profile is live.
+  var GOOGLE_REVIEW_URL = "https://g.page/r/PLACEHOLDER";
+  var stars = document.querySelectorAll('#stars button');
+  stars.forEach(function(btn){
+    btn.addEventListener('mouseenter',function(){
+      var v=+btn.dataset.v;stars.forEach(function(s){s.classList.toggle('lit',+s.dataset.v<=v);});
+    });
+    btn.addEventListener('mouseleave',function(){stars.forEach(function(s){s.classList.remove('lit');});});
+    btn.addEventListener('click',function(){
+      var v=+btn.dataset.v;
+      if(v>=4){window.location.href=GOOGLE_REVIEW_URL;}
+      else{window.location.href='private.html?rating='+v;}
+    });
+  });
+</script>
+</body>
+</html>
